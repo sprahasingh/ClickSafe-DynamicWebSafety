@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClickSafe</title>
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Font 'Roboto Mono' (Placeholder for Geist Mono) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Close button -->
+      <button id="close-button" class="close-button">&times;</button>
+
+      <!-- Header Section -->
+      <div class="header">
+        <h1>ClickSafe</h1>
+        <p class="tagline">Browse with confidence, click with security</p>
+      </div>
+
+      <!-- Input Section -->
+      <div class="input-group">
+        <input type="text" id="website-input" placeholder="Enter website URL" />
+      </div>
+      <button id="check-button">Check Website</button>
+
+      <!-- Loading Message -->
+      <div id="loading" style="display: none">Loading, please wait...</div>
+      <div id="result"></div>
+
+      <!-- Analytics Section -->
+      <div id="analytics-section" style="display: none; margin-top: 20px">
+        <button id="analytics-button">View Analytics</button>
+        <div id="chart-container"></div>
+      </div>
+
+      <div class="separator"></div>
+
+      <!-- Current Tab Section -->
+      <p>Check the current tab:</p>
+      <button id="check-tab-button">Check Current Tab</button>
+      <div id="loading-tab" style="display: none">Loading, please wait...</div>
+      <div id="tab-result"></div>
+
+      <!-- Tab Analytics Section -->
+      <div id="analytics-section-tab" style="display: none; margin-top: 20px">
+        <button id="analytics-button-tab">View Tab Analytics</button>
+        <div id="chart-container-tab"></div>
+      </div>
+
+      <div class="separator"></div>
+
+      <!-- Clear Button -->
+      <div class="clear-container">
+        <button id="clear-button">Clear All</button>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="popup.js"></script>
+  </body>
+</html>
