@@ -20,7 +20,7 @@ ClickSafe is a Google Chrome extension that analyzes URLs using machine learning
 1. Clone this repository:  
    ```bash
    git clone https://github.com/sprahasingh/ClickSafe-DynamicWebSafety.git
-   cd ClickSafe
+   cd ClickSafe-DynamicWebSafety
 2. Install Python dependencies:
    ```bash
    pip install -r requirements.txt
