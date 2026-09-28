@@ -304,45 +304,34 @@ chrome://extensions/
 
 ## Extension Demo
 
-### Safe Website
-![Safe result — google.com](Images/popup_safe_google.jpeg)
+### Extension Popup — Risk Results
 
-*ClickSafe identifies `https://www.google.com` as **safe** (green border).*
+<div align="center">
 
----
+| Safe | Very Low Risk |
+|:----:|:-------------:|
+| <img src="Images/popup_safe_google.jpeg" width="220"/> | <img src="Images/popup_very_low_risk.jpeg" width="220"/> |
+| google.com — **Safe** | example.com — **Very Low Risk** |
 
-### Very Low Risk Website
-![Very low risk result — example.com](Images/popup_very_low_risk.jpeg)
+| Unsafe (Warning) | Danger (Phishing) |
+|:----------------:|:-----------------:|
+| <img src="Images/popup_unsafe_warning.jpeg" width="220"/> | <img src="Images/popup_danger_phishing.jpeg" width="220"/> |
+| z-library.sk — **Unsafe (58%)** | bankofameriica.com — **Danger** |
 
-*`www.example.com` is assessed as **very low risk** — likely safe to access.*
-
----
-
-### Unsafe Website Warning
-![Unsafe warning — z-library.sk](Images/popup_unsafe_warning.jpeg)
-
-*`z-library.sk` flagged as **unsafe** with a risk probability of 58% (orange border).*
+</div>
 
 ---
 
-### Danger — Phishing / High-Risk Website
-![Danger result — phishing site](Images/popup_danger_phishing.jpeg)
+### SHAP Analytics — Feature Explanations
 
-*A spoofed banking URL is identified as **unsafe with very high risk** (red border).*
+<div align="center">
 
----
+| Safe Prediction | Unsafe Prediction |
+|:---------------:|:-----------------:|
+| <img src="Images/analytics_shap_safe_features.jpeg" width="420"/> | <img src="Images/analytics_shap_unsafe_features.jpeg" width="420"/> |
+| Top contributors to a **safe** result | Top contributors to an **unsafe** result |
 
-### SHAP Analytics — Safe Prediction
-![SHAP feature contributions for safe prediction](Images/analytics_shap_safe_features.jpeg)
-
-*Top features contributing to a **safe** prediction: domain age, registration length, and internal link ratios.*
-
----
-
-### SHAP Analytics — Unsafe Prediction
-![SHAP feature contributions for unsafe prediction](Images/analytics_shap_unsafe_features.jpeg)
-
-*Top features contributing to an **unsafe** prediction: slash count, URL depth, and IP usage.*
+</div>
 
 ---
 
