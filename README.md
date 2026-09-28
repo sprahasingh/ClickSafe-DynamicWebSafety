@@ -302,6 +302,50 @@ chrome://extensions/
 
 ---
 
+## Extension Demo
+
+### Safe Website
+![Safe result — google.com](Images/popup_safe_google.jpeg)
+
+*ClickSafe identifies `https://www.google.com` as **safe** (green border).*
+
+---
+
+### Very Low Risk Website
+![Very low risk result — example.com](Images/popup_very_low_risk.jpeg)
+
+*`www.example.com` is assessed as **very low risk** — likely safe to access.*
+
+---
+
+### Unsafe Website Warning
+![Unsafe warning — z-library.sk](Images/popup_unsafe_warning.jpeg)
+
+*`z-library.sk` flagged as **unsafe** with a risk probability of 58% (orange border).*
+
+---
+
+### Danger — Phishing / High-Risk Website
+![Danger result — phishing site](Images/popup_danger_phishing.jpeg)
+
+*A spoofed banking URL is identified as **unsafe with very high risk** (red border).*
+
+---
+
+### SHAP Analytics — Safe Prediction
+![SHAP feature contributions for safe prediction](Images/analytics_shap_safe_features.jpeg)
+
+*Top features contributing to a **safe** prediction: domain age, registration length, and internal link ratios.*
+
+---
+
+### SHAP Analytics — Unsafe Prediction
+![SHAP feature contributions for unsafe prediction](Images/analytics_shap_unsafe_features.jpeg)
+
+*Top features contributing to an **unsafe** prediction: slash count, URL depth, and IP usage.*
+
+---
+
 ## How ClickSafe Works
 
 1. The user visits or analyzes a website through the Chrome extension.
