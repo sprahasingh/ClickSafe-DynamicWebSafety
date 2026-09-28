@@ -8,22 +8,23 @@ ClickSafe is a **Google Chrome extension powered by machine learning** that anal
 
 ## Table of Contents
 
-- [Demo](#demo)
-- [Key Features](#key-features)
-- [System Architecture](#system-architecture)
-- [Model Performance](#model-performance)
-- [Feature Categories](#feature-categories)
-- [ML Pipeline](#ml-pipeline)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [How It Works](#how-it-works)
-- [Technologies Used](#technologies-used)
-- [Dataset](#dataset)
-- [SHAP Explainability](#shap-explainability)
-- [Results](#results)
-- [Future Improvements](#future-improvements)
-- [Disclaimer](#disclaimer)
-- [Author](#author)
+| | Section |
+|---|---|
+| 01 | [Demo](#demo) |
+| 02 | [Key Features](#key-features) |
+| 03 | [System Architecture](#system-architecture) |
+| 04 | [Model Performance](#model-performance) |
+| 05 | [Feature Categories](#feature-categories) |
+| 06 | [ML Pipeline](#ml-pipeline) |
+| 07 | [Project Structure](#project-structure) |
+| 08 | [Installation](#installation) |
+| 09 | [How It Works](#how-it-works) |
+| 10 | [Technologies Used](#technologies-used) |
+| 11 | [Dataset](#dataset) |
+| 12 | [SHAP Explainability](#shap-explainability) |
+| 13 | [Results](#results) |
+| 14 | [Future Improvements](#future-improvements) |
+| 15 | [Disclaimer](#disclaimer) |
 
 ---
 
@@ -32,28 +33,51 @@ ClickSafe is a **Google Chrome extension powered by machine learning** that anal
 ### Extension Popup
 
 <div align="center">
-
-|                        🟢 Safe                         |                     🟢 Very Low Risk                     |
-| :----------------------------------------------------: | :------------------------------------------------------: |
-| <img src="Images/popup_safe_google.jpeg" width="180"/> | <img src="Images/popup_very_low_risk.jpeg" width="180"/> |
-|                  `google.com` — Safe                   |              `example.com` — Very Low Risk               |
-
-|                         🟠 Unsafe                         |                         🔴 Danger                          |
-| :-------------------------------------------------------: | :--------------------------------------------------------: |
-| <img src="Images/popup_unsafe_warning.jpeg" width="180"/> | <img src="Images/popup_danger_phishing.jpeg" width="180"/> |
-|               `z-library.sk` — Unsafe (58%)               |                   Phishing URL — Danger                    |
-
+<table>
+  <tr>
+    <th width="280">🟢 Safe</th>
+    <th width="280">🟢 Very Low Risk</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="Images/popup_safe_google.jpeg" width="220"/></td>
+    <td align="center"><img src="Images/popup_very_low_risk.jpeg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><code>google.com</code> — Safe</td>
+    <td align="center"><code>example.com</code> — Very Low Risk</td>
+  </tr>
+  <tr>
+    <th>🟠 Unsafe</th>
+    <th>🔴 Danger</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="Images/popup_unsafe_warning.jpeg" width="220"/></td>
+    <td align="center"><img src="Images/popup_danger_phishing.jpeg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><code>z-library.sk</code> — Unsafe (58%)</td>
+    <td align="center">Phishing URL — Danger</td>
+  </tr>
+</table>
 </div>
 
 ### SHAP Analytics
 
 <div align="center">
-
-|                          Safe Prediction                          |                          Unsafe Prediction                          |
-| :---------------------------------------------------------------: | :-----------------------------------------------------------------: |
-| <img src="Images/analytics_shap_safe_features.jpeg" width="380"/> | <img src="Images/analytics_shap_unsafe_features.jpeg" width="380"/> |
-|               Top contributors to a **safe** result               |              Top contributors to an **unsafe** result               |
-
+<table>
+  <tr>
+    <th width="420">Safe Prediction</th>
+    <th width="420">Unsafe Prediction</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="Images/analytics_shap_safe_features.jpeg" width="380"/></td>
+    <td align="center"><img src="Images/analytics_shap_unsafe_features.jpeg" width="380"/></td>
+  </tr>
+  <tr>
+    <td align="center">Top contributors to a <strong>safe</strong> result</td>
+    <td align="center">Top contributors to an <strong>unsafe</strong> result</td>
+  </tr>
+</table>
 </div>
 
 ---
