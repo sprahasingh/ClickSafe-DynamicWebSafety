@@ -1,106 +1,126 @@
-# ClickSafe: Dynamic Web Safety System
+# ClickSafe — Dynamic Web Safety System
 
-**Browse with confidence, click with security.**
+> **Browse with confidence, click with security.**
 
-ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level before users interact with potentially unsafe links.
+ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and runs them through a **weighted ensemble of ML models** to detect suspicious or malicious websites — with **SHAP explainability** showing exactly why a prediction was made.
 
-The system extracts **50+ URL, host, and webpage-content features** and uses multiple machine learning models combined through a **weighted ensemble** to detect suspicious and potentially malicious websites. ClickSafe also uses **SHAP explainability** to show the key features influencing each prediction.
+---
+
+## Table of Contents
+
+- [Demo](#demo)
+- [Key Features](#key-features)
+- [System Architecture](#system-architecture)
+- [Model Performance](#model-performance)
+- [Feature Categories](#feature-categories)
+- [ML Pipeline](#ml-pipeline)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [How It Works](#how-it-works)
+- [Technologies Used](#technologies-used)
+- [Dataset](#dataset)
+- [SHAP Explainability](#shap-explainability)
+- [Results](#results)
+- [Future Improvements](#future-improvements)
+- [Disclaimer](#disclaimer)
+- [Author](#author)
+
+---
+
+## Demo
+
+### Extension Popup
+
+<div align="center">
+
+|                        🟢 Safe                         |                     🟢 Very Low Risk                     |
+| :----------------------------------------------------: | :------------------------------------------------------: |
+| <img src="Images/popup_safe_google.jpeg" width="180"/> | <img src="Images/popup_very_low_risk.jpeg" width="180"/> |
+|                  `google.com` — Safe                   |              `example.com` — Very Low Risk               |
+
+|                         🟠 Unsafe                         |                         🔴 Danger                          |
+| :-------------------------------------------------------: | :--------------------------------------------------------: |
+| <img src="Images/popup_unsafe_warning.jpeg" width="180"/> | <img src="Images/popup_danger_phishing.jpeg" width="180"/> |
+|               `z-library.sk` — Unsafe (58%)               |                   Phishing URL — Danger                    |
+
+</div>
+
+### SHAP Analytics
+
+<div align="center">
+
+|                          Safe Prediction                          |                          Unsafe Prediction                          |
+| :---------------------------------------------------------------: | :-----------------------------------------------------------------: |
+| <img src="Images/analytics_shap_safe_features.jpeg" width="380"/> | <img src="Images/analytics_shap_unsafe_features.jpeg" width="380"/> |
+|               Top contributors to a **safe** result               |              Top contributors to an **unsafe** result               |
+
+</div>
 
 ---
 
 ## Key Features
 
-* **Dynamic Website Analysis**
-  Extracts 50+ lexical, URL, host/domain, and webpage-content features.
+| Feature                   | Description                                                          |
+| ------------------------- | -------------------------------------------------------------------- |
+| **Dynamic Analysis**      | Extracts 50+ lexical, URL, host/domain, and webpage-content features |
+| **ML Ensemble**           | Combines Random Forest, XGBoost, Gradient Boosting, and Extra Trees  |
+| **Weighted Prediction**   | Ensemble weighting improves robustness and generalization            |
+| **5-Level Risk Rating**   | Granular risk classification from Safe to Danger                     |
+| **SHAP Explainability**   | Feature-level explanations for every prediction                      |
+| **Chrome Extension**      | Clean popup UI for real-time risk assessment                         |
+| **Interactive Analytics** | Visualizations of prediction factors and feature importance          |
 
-* **Machine Learning Detection**
-  Uses an ensemble of:
+### Risk Levels
 
-  * Random Forest
-  * XGBoost
-  * Gradient Boosting
-  * Extra Trees
-
-* **Weighted Ensemble Prediction**
-  Combines predictions from multiple models to improve robustness and generalization.
-
-* **5-Level Risk Categorization**
-
-  * 🟢 **Safe** — <20%
-  * 🟢 **Very Low Risk** — 20–30%
-  * 🟡 **Moderate Risk** — 30–50%
-  * 🟠 **Unsafe** — 50–80%
-  * 🔴 **Danger** — ≥80%
-
-* **SHAP-Based Explainability**
-  Provides feature-level explanations showing which characteristics contributed to the prediction.
-
-* **Chrome Extension Interface**
-  Provides a user-friendly popup for viewing website safety predictions and risk details.
-
-* **Interactive Analytics**
-  Displays prediction information and feature-level insights through visualizations.
+| Level         | Color | Probability |
+| ------------- | ----- | ----------- |
+| Safe          | 🟢    | < 20%       |
+| Very Low Risk | 🟢    | 20–30%      |
+| Moderate Risk | 🟡    | 30–50%      |
+| Unsafe        | 🟠    | 50–80%      |
+| Danger        | 🔴    | ≥ 80%       |
 
 ---
 
 ## System Architecture
 
-```text
-                    ┌──────────────────────┐
-                    │    Chrome Browser    │
-                    │   + ClickSafe        │
-                    │      Extension       │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │     URL Processing   │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-              ┌─────────────────────────────────┐
-              │       Feature Extraction        │
-              │                                 │
-              │  • URL / Lexical Features      │
-              │  • Host / Domain Features      │
-              │  • Webpage Content Features    │
-              │  • 50+ Features                │
-              └───────────────┬─────────────────┘
-                              │
-                              ▼
-              ┌─────────────────────────────────┐
-              │       ML Model Ensemble         │
-              │                                 │
-              │  • Random Forest               │
-              │  • XGBoost                     │
-              │  • Gradient Boosting           │
-              │  • Extra Trees                 │
-              └───────────────┬─────────────────┘
-                              │
-                              ▼
-                    ┌──────────────────────┐
-                    │ Weighted Prediction  │
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────┴───────────┐
-                    ▼                      ▼
-          ┌──────────────────┐   ┌──────────────────┐
-          │ Risk Assessment  │   │ SHAP Explanation │
-          └────────┬─────────┘   └────────┬─────────┘
-                   │                      │
-                   └──────────┬───────────┘
-                              ▼
-                    ┌──────────────────────┐
-                    │ ClickSafe Extension  │
-                    │  Risk + Explanation  │
-                    └──────────────────────┘
+```
+Chrome Browser + ClickSafe Extension
+            │
+            ▼
+      URL Processing
+            │
+            ▼
+    Feature Extraction
+    ┌───────────────────┐
+    │ • URL / Lexical   │
+    │ • Host / Domain   │
+    │ • Webpage Content │
+    │ • 50+ Features    │
+    └────────┬──────────┘
+             │
+             ▼
+     ML Model Ensemble
+    ┌───────────────────┐
+    │ • Random Forest   │
+    │ • XGBoost         │
+    │ • Gradient Boost  │
+    │ • Extra Trees     │
+    └────────┬──────────┘
+             │
+             ▼
+    Weighted Prediction
+          ┌──┴──┐
+          ▼     ▼
+   Risk Level  SHAP Explanation
+          └──┬──┘
+             ▼
+    ClickSafe Extension UI
 ```
 
 ---
 
 ## Model Performance
-
-The weighted ensemble achieved the following results on the test data:
 
 | Metric        |      Score |
 | ------------- | ---------: |
@@ -110,151 +130,71 @@ The weighted ensemble achieved the following results on the test data:
 | **F1-Score**  |  **90.7%** |
 | **ROC-AUC**   | **0.9744** |
 
-Among the individual tuned models, XGBoost achieved an accuracy of **91.72%**.
+> Among individual models, XGBoost achieved the highest accuracy at **91.72%**.
 
 ---
 
-## Features
-
-ClickSafe uses three major categories of features.
+## Feature Categories
 
 ### 1. URL / Lexical Features
 
-Examples include:
-
-* URL length
-* Number of dots
-* Number of subdomains
-* Number of URL parameters
-* Digit ratio
-* URL depth
-* HTTPS usage
-* URL shortening
-* Suspicious prefixes/suffixes
-* Double-slash patterns
-* Uncommon TLDs
+- URL length, depth, and structure
+- Number of dots, subdomains, and parameters
+- Digit ratio and suspicious character patterns
+- HTTPS usage and URL shortening
+- Suspicious prefixes/suffixes and uncommon TLDs
+- Double-slash patterns
 
 ### 2. Host / Domain Features
 
-Examples include:
-
-* Domain age
-* Domain registration length
-* IP address usage
-* Number of hyphens
-* Hostname length
-* Number of subdomains
-* Numeric domain detection
-* Domain misspelling
-* Non-standard ports
-* TLD-related features
+- Domain age and registration length
+- IP address usage and numeric domain detection
+- Number of hyphens and hostname length
+- Domain misspelling and brand matching
+- Non-standard ports and TLD-related signals
 
 ### 3. Webpage Content Features
 
-Examples include:
-
-* Number of hyperlinks
-* External hyperlink ratio
-* External redirection ratio
-* Links inside HTML tags
-* Domain presence in webpage title
-* Internal/external media ratios
-* External CSS count
-* Phishing hints
-* Safe-anchor indicators
-* Domain/brand matching
+- Number and ratio of hyperlinks (internal vs external)
+- External redirection ratio
+- Links inside `<script>`, `<meta>`, and other HTML tags
+- Domain presence in page title
+- Internal/external media ratios
+- External CSS count and phishing keyword hints
 
 ---
 
-## Machine Learning Pipeline
+## ML Pipeline
 
-```text
-Dataset
-   │
-   ▼
-Data Cleaning
-   │
-   ▼
-Feature Engineering
-   │
-   ▼
-Missing Value Handling
-   │
-   ▼
-Feature Selection
-   │
-   ▼
-Train / Test Split
-   │
-   ▼
-Model Training
-   │
-   ├── Random Forest
-   ├── XGBoost
-   ├── Gradient Boosting
-   └── Extra Trees
-   │
-   ▼
-Weighted Ensemble
-   │
-   ▼
-Risk Prediction
-   │
-   ▼
-SHAP Explanation
+```
+Dataset → Data Cleaning → Feature Engineering → Missing Value Handling
+    → Feature Selection → Train/Test Split (80/20)
+    → Model Training (RF, XGBoost, GB, Extra Trees)
+    → Weighted Ensemble → Risk Prediction → SHAP Explanation
 ```
 
 ---
 
 ## Project Structure
 
-```text
+```
 ClickSafe-DynamicWebSafety/
 │
-├── app.py
+├── app.py                     # Flask backend
+├── feature_extract.py         # Feature extraction logic
 ├── requirements.txt
 │
-├── chrome-extension/
-│   ├── manifest.json
-│   ├── popup.html
-│   ├── popup.css
-│   ├── popup.js
-│   └── ...
+├── manifest.json              # Chrome extension manifest
+├── popup.html / popup.css / popup.js
+├── background.js
+├── analytics.html / analytics.js
 │
-├── models/
-│   └── [trained model files]
-│
-├── feature_extraction/
-│   └── ...
-│
-├── templates/
-│   └── ...
-│
+├── *.pkl                      # Trained model files
+├── Images/                    # Demo screenshots
 └── README.md
 ```
 
-> **Note:** Some trained `.pkl` model files are too large to be stored directly on GitHub. They are provided separately through Google Drive.
-
----
-
-## Download Trained Models
-
-Download the required `.pkl` model files from Google Drive:
-
-### [Download Trained Model Files](https://drive.google.com/drive/folders/1Q2MQkctnP1X_57hdfHzMT_n73Hjtw2zG?usp=sharing)
-
-After downloading, place the `.pkl` files in the appropriate model directory before running the backend.
-
-For example:
-
-```text
-ClickSafe-DynamicWebSafety/
-└── models/
-    ├── random_forest.pkl
-    ├── xgboost.pkl
-    ├── gradient_boosting.pkl
-    └── extra_trees.pkl
-```
+> **Note:** Some `.pkl` model files exceed GitHub's size limit and are hosted separately on Google Drive.
 
 ---
 
@@ -273,9 +213,11 @@ cd ClickSafe-DynamicWebSafety
 pip install -r requirements.txt
 ```
 
-### 3. Download the Trained Models
+### 3. Download Trained Models
 
-Download the `.pkl` files from the [Google Drive model repository](https://drive.google.com/drive/folders/1Q2MQkctnP1X_57hdfHzMT_n73Hjtw2zG?usp=sharing) and place them in the required model directory.
+Download the `.pkl` files from Google Drive and place them in the project root.
+
+**[Download Trained Model Files](https://drive.google.com/drive/folders/1Q2MQkctnP1X_57hdfHzMT_n73Hjtw2zG?usp=sharing)**
 
 ### 4. Run the Flask Backend
 
@@ -283,181 +225,101 @@ Download the `.pkl` files from the [Google Drive model repository](https://drive
 python app.py
 ```
 
-The backend will start locally and handle website analysis requests from the Chrome extension.
-
 ### 5. Load the Chrome Extension
 
-1. Open Google Chrome.
-2. Navigate to:
-
-```text
-chrome://extensions/
-```
-
-3. Enable **Developer mode**.
-4. Click **Load unpacked**.
-5. Select the ClickSafe Chrome extension directory.
-6. Ensure the Flask backend is running.
-7. Open a website and use the ClickSafe extension to view its risk assessment.
+1. Open Chrome and go to `chrome://extensions/`
+2. Enable **Developer mode**
+3. Click **Load unpacked**
+4. Select the `ClickSafe-DynamicWebSafety` directory
+5. Ensure the Flask backend is running, then open any website
 
 ---
 
-## Extension Demo
+## How It Works
 
-### Safe Website
-![Safe result — google.com](Images/popup_safe_google.jpeg)
-
-*ClickSafe identifies `https://www.google.com` as **safe** (green border).*
-
----
-
-### Very Low Risk Website
-![Very low risk result — example.com](Images/popup_very_low_risk.jpeg)
-
-*`www.example.com` is assessed as **very low risk** — likely safe to access.*
-
----
-
-### Unsafe Website Warning
-![Unsafe warning — z-library.sk](Images/popup_unsafe_warning.jpeg)
-
-*`z-library.sk` flagged as **unsafe** with a risk probability of 58% (orange border).*
-
----
-
-### Danger — Phishing / High-Risk Website
-![Danger result — phishing site](Images/popup_danger_phishing.jpeg)
-
-*A spoofed banking URL is identified as **unsafe with very high risk** (red border).*
-
----
-
-### SHAP Analytics — Safe Prediction
-![SHAP feature contributions for safe prediction](Images/analytics_shap_safe_features.jpeg)
-
-*Top features contributing to a **safe** prediction: domain age, registration length, and internal link ratios.*
-
----
-
-### SHAP Analytics — Unsafe Prediction
-![SHAP feature contributions for unsafe prediction](Images/analytics_shap_unsafe_features.jpeg)
-
-*Top features contributing to an **unsafe** prediction: slash count, URL depth, and IP usage.*
-
----
-
-## How ClickSafe Works
-
-1. The user visits or analyzes a website through the Chrome extension.
-2. ClickSafe processes the URL and associated webpage information.
-3. More than 50 URL, host, and content-based features are extracted.
-4. Multiple machine learning models generate predictions.
-5. The weighted ensemble combines the model predictions.
-6. The system assigns a risk level to the website.
-7. SHAP identifies the features contributing to the prediction.
-8. The extension displays the risk level and supporting insights to the user.
+1. User visits a website and opens the ClickSafe extension
+2. The URL and page content are sent to the Flask backend
+3. 50+ features are extracted across URL, host, and content categories
+4. Four ML models each generate a risk prediction
+5. The weighted ensemble combines the predictions into a final score
+6. A risk level (Safe → Danger) is assigned
+7. SHAP identifies the top contributing features
+8. The extension displays the risk level and explanation
 
 ---
 
 ## Technologies Used
 
-| Technology              | Purpose                    |
-| ----------------------- | -------------------------- |
-| **Python**              | Backend and ML pipeline    |
-| **Flask**               | Backend API                |
-| **scikit-learn**        | Machine learning models    |
-| **XGBoost**             | Gradient boosting model    |
-| **SHAP**                | Model explainability       |
-| **HTML/CSS/JavaScript** | Chrome extension interface |
-| **Chrome APIs**         | Browser integration        |
-| **Joblib / Pickle**     | Model serialization        |
-| **Git/GitHub**          | Version control            |
+| Technology                  | Purpose                         |
+| --------------------------- | ------------------------------- |
+| **Python**                  | Backend and ML pipeline         |
+| **Flask**                   | REST API backend                |
+| **scikit-learn**            | ML models (RF, GB, Extra Trees) |
+| **XGBoost**                 | Gradient boosting classifier    |
+| **SHAP**                    | Model explainability            |
+| **HTML / CSS / JavaScript** | Chrome extension UI             |
+| **Chrome APIs**             | Browser integration             |
+| **Joblib / Pickle**         | Model serialization             |
 
 ---
 
 ## Dataset
 
-The project uses website data collected from multiple sources, including:
-
-* Kaggle
-* PhishTank
-* Government websites
-* Custom crawling
-
-The dataset contains **100,000+ instances** and **50+ features**.
-
-The final dataset is approximately balanced between:
-
-* **Safe:** 51.74%
-* **Unsafe:** 48.26%
-
-The machine learning pipeline uses an **80/20 train-test split**, with a validation portion used during model tuning.
+- **Sources:** Kaggle, PhishTank, Government websites, Custom crawling
+- **Size:** 100,000+ instances, 50+ features
+- **Balance:** Safe 51.74% / Unsafe 48.26%
+- **Split:** 80% train / 20% test (with validation during tuning)
 
 ---
 
-## Explainability with SHAP
+## SHAP Explainability
 
-ClickSafe uses **SHAP (SHapley Additive exPlanations)** to make model predictions more interpretable.
+ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand _why_ a prediction was made — not just what the verdict is.
 
-Instead of only showing:
+For an **unsafe** prediction, top contributing features might include:
 
-```text
-Website: UNSAFE
-```
+- High slash count in the URL
+- Suspicious URL depth
+- IP address used instead of a domain name
 
-ClickSafe can identify characteristics that contributed to the prediction, such as:
+For a **safe** prediction, top contributing features might include:
 
-* Suspicious URL patterns
-* Domain age
-* Number of subdomains
-* External hyperlinks
-* Redirection behavior
-* Suspicious keywords
-* URL length
-
-This provides users with additional context behind the model's prediction.
+- Established domain age
+- Long registration period
+- High ratio of internal links
 
 ---
 
-## Project Results
+## Results
 
-ClickSafe achieved:
-
-* **91.36% overall accuracy**
-* **92.4% precision**
-* **89.2% recall**
-* **90.7% F1-score**
-* **0.9744 ROC-AUC**
-* **50+ engineered features**
-* **4 ML classifiers combined through a weighted ensemble**
-* **5 user-facing website risk levels**
-* **SHAP-based prediction explanations**
+- **91.36%** overall accuracy
+- **92.4%** precision / **89.2%** recall / **90.7%** F1-score
+- **0.9744** ROC-AUC
+- **50+** engineered features across 3 categories
+- **4** ML classifiers in a weighted ensemble
+- **5** user-facing risk levels
+- Full SHAP-based prediction explanations
 
 ---
 
 ## Future Improvements
 
-Potential future enhancements include:
-
-* Deep learning models for webpage-content analysis
-* Real-time threat-intelligence integration
-* Behavioral website analysis
-* Multimodal detection using text, images, and URL characteristics
-* Cloud deployment and scalable APIs
-* Continuous learning from user feedback
-* Cross-browser support
-* Mobile browser support
+- Deep learning models for webpage-content analysis
+- Real-time threat-intelligence feed integration
+- Behavioral and JavaScript-based website analysis
+- Multimodal detection (text + images + URL)
+- Cloud deployment with scalable APIs
+- Continuous learning from user feedback
+- Cross-browser and mobile browser support
 
 ---
 
 ## Disclaimer
 
-ClickSafe is an academic machine-learning project intended to assist with website-risk assessment. Its predictions should not be treated as a guarantee that a website is safe or malicious.
+ClickSafe is an academic machine-learning project for website-risk assessment. Predictions should not be treated as a guarantee that a website is safe or malicious.
 
 ---
 
 ## Author
 
-**Spraha Singh**
-
-[GitHub](https://github.com/sprahasingh)
+**Spraha Singh** · [GitHub](https://github.com/sprahasingh)
