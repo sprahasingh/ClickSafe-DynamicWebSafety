@@ -1,6 +1,6 @@
 # ClickSafe — Dynamic Web Safety System
 
-> **Browse with confidence, click with security.**
+> *Browse with confidence, click with security.*
 
 ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and runs them through a **weighted ensemble of ML models** to detect suspicious or malicious websites — with **SHAP explainability** showing exactly why a prediction was made.
 
@@ -218,7 +218,7 @@ ClickSafe-DynamicWebSafety/
 └── README.md
 ```
 
-> **Note:** Some `.pkl` model files exceed GitHub's size limit and are hosted separately on Google Drive.
+> **Note:** Some `.pkl` model files exceed GitHub's size limit and are hosted separately on Google Drive. See [Download Trained Models](#installation) in the Installation section.
 
 ---
 
@@ -241,7 +241,7 @@ pip install -r requirements.txt
 
 Download the `.pkl` files from Google Drive and place them in the project root.
 
-**[Download Trained Model Files](https://drive.google.com/drive/folders/1Q2MQkctnP1X_57hdfHzMT_n73Hjtw2zG?usp=sharing)**
+[Download Trained Model Files](https://drive.google.com/drive/folders/1Q2MQkctnP1X_57hdfHzMT_n73Hjtw2zG?usp=sharing)
 
 ### 4. Run the Flask Backend
 
@@ -300,15 +300,15 @@ python app.py
 
 ## SHAP Explainability
 
-ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand _why_ a prediction was made — not just what the verdict is.
+ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand *why* a prediction was made — not just what the verdict is.
 
-For an **unsafe** prediction, top contributing features might include:
+For an *unsafe* prediction, top contributing features might include:
 
 - High slash count in the URL
 - Suspicious URL depth
 - IP address used instead of a domain name
 
-For a **safe** prediction, top contributing features might include:
+For a *safe* prediction, top contributing features might include:
 
 - Established domain age
 - Long registration period
