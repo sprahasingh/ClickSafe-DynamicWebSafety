@@ -91,7 +91,7 @@ ClickSafe is a **Google Chrome extension powered by machine learning** that anal
 | **Weighted Prediction**   | Ensemble weighting improves robustness and generalization            |
 | **5-Level Risk Rating**   | Granular risk classification from Safe to Danger                     |
 | **SHAP Explainability**   | Feature-level explanations for every prediction                      |
-| **Chrome Extension**      | Clean popup UI for real-time risk assessment                         |
+| **Chrome Extension**      | Popup UI with manual URL entry or one-click current tab analysis     |
 | **Interactive Analytics** | Visualizations of prediction factors and feature importance          |
 
 ### Risk Levels
@@ -261,14 +261,16 @@ python app.py
 
 ## How It Works
 
-1. User visits a website and opens the ClickSafe extension
-2. The URL and page content are sent to the Flask backend
+1. **Open the ClickSafe extension** in Chrome — two ways to analyze a website:
+   - **Enter a URL manually** — type or paste any URL into the input field and click *Check Website*
+   - **Check the current tab** — the extension auto-fills the active tab's URL for instant analysis
+2. The URL is sent to the Flask backend for processing
 3. 50+ features are extracted across URL, host, and content categories
-4. Four ML models each generate a risk prediction
-5. The weighted ensemble combines the predictions into a final score
-6. A risk level (Safe → Danger) is assigned
-7. SHAP identifies the top contributing features
-8. The extension displays the risk level and explanation
+4. Four ML models each generate an independent risk prediction
+5. The weighted ensemble combines the predictions into a final risk score
+6. A risk level (Safe → Danger) is assigned based on the score
+7. SHAP identifies the top features that contributed to the prediction
+8. The extension displays the risk level, verdict, and feature-level explanation
 
 ---
 
