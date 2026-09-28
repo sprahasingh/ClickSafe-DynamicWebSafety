@@ -1,8 +1,8 @@
-# ClickSafe — Dynamic Web Safety System
+# ClickSafe: Dynamic Web Safety System
 
 > *Browse with confidence, click with security.*
 
-ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and runs them through a **weighted ensemble of ML models** to detect suspicious or malicious websites — with **SHAP explainability** showing exactly why a prediction was made.
+ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and runs them through a **weighted ensemble of ML models** to detect suspicious or malicious websites, with **SHAP explainability** showing exactly why a prediction was made.
 
 ---
 
@@ -43,8 +43,8 @@ ClickSafe is a **Google Chrome extension powered by machine learning** that anal
     <td align="center"><img src="Images/popup_very_low_risk.jpeg" width="220"/></td>
   </tr>
   <tr>
-    <td align="center"><code>google.com</code> — Safe</td>
-    <td align="center"><code>example.com</code> — Very Low Risk</td>
+    <td align="center"><code>google.com</code>: Safe</td>
+    <td align="center"><code>example.com</code>: Very Low Risk</td>
   </tr>
   <tr>
     <th>🟠 Unsafe</th>
@@ -55,8 +55,8 @@ ClickSafe is a **Google Chrome extension powered by machine learning** that anal
     <td align="center"><img src="Images/popup_danger_phishing.jpeg" width="220"/></td>
   </tr>
   <tr>
-    <td align="center"><code>z-library.sk</code> — Unsafe (58%)</td>
-    <td align="center">Phishing URL — Danger</td>
+    <td align="center"><code>z-library.sk</code>: Unsafe (58%)</td>
+    <td align="center">Phishing URL: Danger</td>
   </tr>
 </table>
 </div>
@@ -261,9 +261,9 @@ python app.py
 
 ## How It Works
 
-1. **Open the ClickSafe extension** in Chrome — two ways to analyze a website:
-   - **Enter a URL manually** — type or paste any URL into the input field and click *Check Website*
-   - **Check the current tab** — the extension auto-fills the active tab's URL for instant analysis
+1. **Open the ClickSafe extension** in Chrome. Two ways to analyze a website:
+   - **Enter a URL manually**: type or paste any URL into the input field and click *Check Website*
+   - **Check the current tab**: the extension auto-fills the active tab's URL for instant analysis
 2. The URL is sent to the Flask backend for processing
 3. 50+ features are extracted across URL, host, and content categories
 4. Four ML models each generate an independent risk prediction
@@ -300,7 +300,7 @@ python app.py
 
 ## SHAP Explainability
 
-ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand *why* a prediction was made — not just what the verdict is.
+ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand *why* a prediction was made, not just what the verdict is.
 
 For an *unsafe* prediction, top contributing features might include:
 
