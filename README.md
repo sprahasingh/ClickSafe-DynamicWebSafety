@@ -1,30 +1,30 @@
 # ClickSafe: Dynamic Web Safety System
 
-> *Browse with confidence, click with security.*
+> _Browse with confidence, click with security._
 
-ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and runs them through a **weighted ensemble of ML models** to detect suspicious or malicious websites, with **SHAP explainability** showing exactly why a prediction was made.
+ClickSafe is a **Google Chrome extension powered by machine learning** that analyzes websites and predicts their safety level in real time. It extracts **50+ URL, host, and webpage-content features** and uses a **weighted ensemble of ML models** to detect suspicious or malicious websites. **SHAP explainability** shows which features contributed to each prediction.
 
 ---
 
 ## Table of Contents
 
-| | Section |
-|---|---|
-| 01 | [Demo](#demo) |
-| 02 | [Key Features](#key-features) |
-| 03 | [System Architecture](#system-architecture) |
-| 04 | [Model Performance](#model-performance) |
-| 05 | [Feature Categories](#feature-categories) |
-| 06 | [ML Pipeline](#ml-pipeline) |
-| 07 | [Project Structure](#project-structure) |
-| 08 | [Installation](#installation) |
-| 09 | [How It Works](#how-it-works) |
-| 10 | [Technologies Used](#technologies-used) |
-| 11 | [Dataset](#dataset) |
-| 12 | [SHAP Explainability](#shap-explainability) |
-| 13 | [Results](#results) |
-| 14 | [Future Improvements](#future-improvements) |
-| 15 | [Disclaimer](#disclaimer) |
+|     | Section                                     |
+| --- | ------------------------------------------- |
+| 01  | [Demo](#demo)                               |
+| 02  | [Key Features](#key-features)               |
+| 03  | [System Architecture](#system-architecture) |
+| 04  | [Model Performance](#model-performance)     |
+| 05  | [Feature Categories](#feature-categories)   |
+| 06  | [ML Pipeline](#ml-pipeline)                 |
+| 07  | [Project Structure](#project-structure)     |
+| 08  | [Installation](#installation)               |
+| 09  | [How It Works](#how-it-works)               |
+| 10  | [Technologies Used](#technologies-used)     |
+| 11  | [Dataset](#dataset)                         |
+| 12  | [SHAP Explainability](#shap-explainability) |
+| 13  | [Results](#results)                         |
+| 14  | [Future Improvements](#future-improvements) |
+| 15  | [Disclaimer](#disclaimer)                   |
 
 ---
 
@@ -262,7 +262,7 @@ python app.py
 ## How It Works
 
 1. **Open the ClickSafe extension** in Chrome. Two ways to analyze a website:
-   - **Enter a URL manually**: type or paste any URL into the input field and click *Check Website*
+   - **Enter a URL manually**: type or paste any URL into the input field and click _Check Website_
    - **Check the current tab**: the extension auto-fills the active tab's URL for instant analysis
 2. The URL is sent to the Flask backend for processing
 3. 50+ features are extracted across URL, host, and content categories
@@ -300,15 +300,15 @@ python app.py
 
 ## SHAP Explainability
 
-ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand *why* a prediction was made, not just what the verdict is.
+ClickSafe uses **SHAP (SHapley Additive exPlanations)** so users understand _why_ a prediction was made, not just what the verdict is.
 
-For an *unsafe* prediction, top contributing features might include:
+For an _unsafe_ prediction, top contributing features might include:
 
 - High slash count in the URL
 - Suspicious URL depth
 - IP address used instead of a domain name
 
-For a *safe* prediction, top contributing features might include:
+For a _safe_ prediction, top contributing features might include:
 
 - Established domain age
 - Long registration period
